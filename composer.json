@@ -1,0 +1,11 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Blade\\Components\\": "components",
+            "Blade\\Core\\": "core"
+        }
+    },
+    "require": {
+        "phpunit/phpunit": "^10.2"
+    }
+}
