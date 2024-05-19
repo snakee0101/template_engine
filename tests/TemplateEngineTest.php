@@ -142,4 +142,14 @@ class TemplateEngineTest extends TestCase
 
         $this->assertEquals($content, $e->compile($view_path));
     }
+
+    public function test_simple_directives_are_transformed()
+    {
+        $e = new TemplateEngine;
+        $e->loadConfig();
+
+        $res = $e->transformSimpleDirectives('@for($a = 7; $a < 14; $a++) @for($a = 7; $a < 14; $a++)');
+
+        var_dump($res);
+    }
 }

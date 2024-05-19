@@ -5,6 +5,34 @@ namespace Blade\Core;
 class TemplateEngine
 {
     /**
+     * When transformed, blade directives must be wrapped in php tags
+     */
+    public $wrapper = ['<?php ', ' ?>'];
+
+    /**
+     * Transformations of directives are described with regular expressions.
+     * Directive content (capturing group) is inserted inside transformed directive
+     * instead of placeholder
+     * 
+     * [match_pattern => directive_nama_with_content_placeholder]
+     */
+    public $simple_directives = [
+        '/@for\((.*)\)/' => 'for(DIRECTIVE_CONTENT):'
+    ];
+
+    public function transformSimpleDirectives($content)
+    {
+        foreach ($this->simple_directives as $pattern => $replacement_rule) {
+            preg_match_all($pattern, $content, $matches);
+
+            $directive_content = $matches[1];
+
+
+            return $matches;
+        }
+    }
+
+    /**
      * Returns the value of config parameter in the session
      * with possibility to temporary replace config value 
      * (without complex parameter names ('like p1.p2.p3') for now)
